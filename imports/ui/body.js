@@ -41,10 +41,17 @@ Template.body.events({
     const text = target.text.value;
 
     // Insert a task into the collection
-    Tasks.insert({
-      text,
-      createdAt: new Date(),  // current time
-    });
+    /*
+      Before running `meteor remove insecure`
+
+      Tasks.insert({
+        text,
+        createdAt: new Date(),  // current time
+        owner: Meteor.userId(),
+        username: Meteor.user().username,
+      });
+    */
+    Meteor.call('tasks.insert', text);
 
     // Clear form
     target.text.value = '';
